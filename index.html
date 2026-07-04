@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+overflow:hidden;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(-45deg,#ff6ec4,#7873f5,#4ADEDE,#ff9a9e);
+background-size:400% 400%;
+animation:bg 12s infinite alternate;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%;}
+100%{background-position:100% 50%;}
+}
+
+.card{
+width:370px;
+padding:25px;
+background:rgba(255,255,255,.2);
+backdrop-filter:blur(12px);
+border-radius:20px;
+text-align:center;
+color:white;
+box-shadow:0 0 25px rgba(255,255,255,.5);
+z-index:10;
+}
+
+.photo{
+width:180px;
+height:180px;
+margin:auto;
+border-radius:50%;
+overflow:hidden;
+border:5px solid white;
+box-shadow:0 0 20px yellow;
+}
+
+.photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+h1{
+margin:15px 0;
+font-size:35px;
+animation:glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px yellow;}
+to{text-shadow:0 0 30px white,0 0 50px gold;}
+}
+
+p{
+font-size:18px;
+margin:15px 0;
+}
+
+button{
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:30px;
+background:#ff4081;
+color:white;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+#countdown{
+font-size:20px;
+margin:15px;
+font-weight:bold;
+color:yellow;
+}
+
+/* Balloons */
+
+.balloon{
+position:absolute;
+bottom:-150px;
+font-size:50px;
+animation:float linear infinite;
+}
+
+@keyframes float{
+to{
+transform:translateY(-120vh);
+}
+}
+
+/* Hearts */
+
+.heart{
+position:absolute;
+color:pink;
+font-size:25px;
+animation:heart 8s linear infinite;
+}
+
+@keyframes heart{
+0%{
+transform:translateY(100vh);
+opacity:1;
+}
+100%{
+transform:translateY(-100vh);
+opacity:0;
+}
+}
+
+/* Confetti */
+
+.confetti{
+position:absolute;
+width:10px;
+height:10px;
+background:red;
+animation:confetti 6s linear infinite;
+}
+
+@keyframes confetti{
+to{
+transform:translateY(120vh) rotate(720deg);
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="photo">
+<img src="friend.png" alt="Friend">
+</div>
+
+<h1>🎉 Happy Birthday 🎂 </h1>
+<p>Dear <b>RAUSHAN </b>,<br>
+May your life be filled with happiness, love and success.
+Have an amazing birthday! ❤️</p>
+
+<div id="countdown"></div>
+
+<button onclick="surprise()">
+🎁 Surprise
+</button>
+
+<!-- Replace birthday.mp3 with your music -->
+<audio autoplay loop controls style="margin-top:15px;width:100%;">
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<script>
+
+function surprise(){
+alert("🎂happy birthday in advance ab party chahiye bsdkiwala 7 september ko ❤️");
+}
+
+// Countdown
+let birthday=new Date("2026-09-07T00:00:00").getTime();
+
+setInterval(function(){
+
+let now=new Date().getTime();
+
+let d=birthday-now;
+
+if(d<0){
+document.getElementById("countdown").innerHTML="🎉 Today is the Birthday!";
+return;
+}
+
+let days=Math.floor(d/(1000*60*60*24));
+let hrs=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+let min=Math.floor((d%(1000*60*60))/(1000*60));
+let sec=Math.floor((d%(1000*60))/1000);
+
+document.getElementById("countdown").innerHTML=
+"🎂 "+days+" Days "+hrs+"h "+min+"m "+sec+"s";
+
+},1000);
+
+
+// Balloons
+for(let i=0;i<20;i++){
+let b=document.createElement("div");
+b.className="balloon";
+b.innerHTML="🎈";
+b.style.left=Math.random()*100+"vw";
+b.style.animationDuration=(6+Math.random()*6)+"s";
+b.style.fontSize=(30+Math.random()*40)+"px";
+document.body.appendChild(b);
+}
+
+// Hearts
+for(let i=0;i<25;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(5+Math.random()*5)+"s";
+document.body.appendChild(h);
+}
+
+// Confetti
+let colors=["red","yellow","blue","green","orange","pink","purple"];
+
+for(let i=0;i<120;i++){
+
+let c=document.createElement("div");
+
+c.className="confetti";
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+c.style.animationDuration=(3+Math.random()*5)+"s";
+
+document.body.appendChild(c);
+
+}
+
+</script>
+</body>
+</html>
